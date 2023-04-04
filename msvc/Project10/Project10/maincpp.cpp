@@ -9,9 +9,5 @@
 
 int main()
 {
-	Tetris game;
-	game.Welocme();
-	system("cls");				//Çå³ý»¶Ó­½çÃæ
-	game.DrawMap();
-	game.Run();
+
 }
