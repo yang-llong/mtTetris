@@ -1,0 +1,4 @@
+﻿  maincpp.cpp
+D:\数据\gitCode\mtTetris\msvc\Project10\Project10\Tetris.h(145,16): warning C4838: 从“int”转换到“SHORT”需要收缩转换
+D:\数据\gitCode\mtTetris\msvc\Project10\Project10\Tetris.h(145,18): warning C4838: 从“int”转换到“SHORT”需要收缩转换
+  Project10.vcxproj -> D:\数据\gitCode\mtTetris\msvc\Project10\Debug\Project10.exe
