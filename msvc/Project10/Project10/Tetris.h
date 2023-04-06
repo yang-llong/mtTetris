@@ -247,4 +247,49 @@ void Tetris::Input_score()
 	cout << "得分：" << score;
 }
 
+void Tetris::Welcome()
+{
+	SetColor(1);
+	char x;
+	while(1)
+	{
+		system("cls:");
+		cout << "■■■■■■■■■■■■■■■■■■■■■" << endl;
+		cout << "		俄罗斯方块		" << endl;
+		cout << "■■■■■■■■■■■■■■■■■■■■■" << endl;
+		cout << "		操作方式：" << endl;
+		cout << "		↑ - 旋转" << endl;
+		cout << "		↓ - 加速下移" << endl;
+		cout << "		← - 左移" << endl;
+		cout << "		→ - 右移" << endl;
+		cout << "		空格 - 暂停" << endl;
+		cout << "■■■■■■■■■■■■■■■■■■■■■" << endl;
+		cout << "■ 按1—3选择难度■" << endl;
+		SetPos(20,10);
+		x = getchar();
+		if(x<='9' && x>= '0')
+		{
+			rank = x-'0';
+			break;
+		}
+	}
+}
+
+
+void Tetris::SetColor(int color_num)
+{
+	int n;
+	switch(color_num)
+	{
+		case 0: n = 0x08;break;
+		case 1: n = 0x0C;break;
+		case 2: n = 0x0D;break;
+		case 3: n = 0x0E;break;
+		case 4: n = 0x0A;break;
+	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), n);
+}
+
+
+
 
