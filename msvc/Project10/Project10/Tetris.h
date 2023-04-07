@@ -366,7 +366,116 @@ bool Tetris::Judge(int x, int y, int num)
 	return false;
 }
 
+void Tetris::Run()
+{
+	int next_id;
+	srand((int)time(0));
 
+	id = rand()%19;
+	next_id = rand()%19;
+
+	Draw(point[0],point[1],id);
+	Draw(5, 16, next_id);
+
+	int count;
+	if(rank==1)
+		count = 150;
+	else if(rank==2)
+		count = 100;
+	else if(rank==3)
+		count = 50;
+	else
+		count = 5;
+	int i = 0;
+
+	while(i)
+	{
+		if(!(i<count))
+		{
+			i = 0;
+			if(Judge(point[0]+1, point[1], id))
+			{
+				Update();
+				id = next_id;
+
+				ReDraw(5, 16, next_id);
+				next_id = rand()%19;
+
+				point[0] = 0; point[1] = 5;
+				Draw(point[0], point[1], id);
+				Draw(5, 16, next_id);
+
+				if (Judge(point[0], point[1], id))
+				{
+					system("cls");
+					SetPos(20, 10);
+					cout << "游戏结束！" << endl;
+					SetPos(20, 11);
+					cout << "你的分数为 " << score << endl;
+					system("pause");
+					exit(1);
+				}
+			}
+			else{
+				ReDraw(point[0], point[1], id);
+				point[0]++;
+				Draw(point[0], point[1], id);
+			}
+		}
+
+		if(_kbhit())
+		{
+			int key, key2;
+			key = _getch();
+			if(key == 224)
+			{
+				key2 = _getch();
+				if(key2 == 72)
+				{
+					int temp = id;
+					Turn(id);
+					if(Judge(point[0], point[1], id))
+						id = temp;
+					ReDraw(point[0], point[1], temp);
+					Draw(point[0], point[1], id);
+				}
+				if(key2 == 80)
+				{
+					if(!Judge(point[0]+2, point[1], id))
+					{
+						ReDraw(point[0], point[1], id);
+						point[0] += 2;
+						Draw(point[0], point[1], id);
+					}
+				}
+				else if(key2 == 75)
+				{
+					if(!Judge(point[0], point[1]-1, id))
+					{
+						ReDraw(point[0], point[1], id);
+						point[1]--;
+						Draw(point[0], point[1], id);
+					}
+				}
+				else if(key2 == 77)
+				{
+					if(!Judge(point[0], point[1]+1, id))
+					{
+						ReDraw(point[0], point[1], id);
+						point[1]++;
+						Draw(point[0], point[1], id);
+					}
+				}
+
+			}
+			else if(key==32)
+				Pause();
+		}
+		Sleep(1);
+		i++;
+		++clock;
+	}
+}
 
 
 
