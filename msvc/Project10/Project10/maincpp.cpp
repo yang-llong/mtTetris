@@ -9,5 +9,9 @@
 
 int main()
 {
-
+    Tetris game;
+    game.Welcome();
+    system("cls");
+    game.DrawMap();
+    game.Run();
 }
