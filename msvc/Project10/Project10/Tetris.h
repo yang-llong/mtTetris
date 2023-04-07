@@ -21,10 +21,10 @@ public:
 	Tetris();
 	void DrawMap();
 	void SetColor(int);
-	void Dra(int,int,int);
+	void Draw(int,int,int);
 	void Run();
 	void ReDraw(int,int,int);
-	void Judge(int,int,int);
+	bool Judge(int,int,int);
 	void Turn(int);
 	void Update();
 	void Pause();
@@ -286,9 +286,90 @@ void Tetris::SetColor(int color_num)
 		case 2: n = 0x0D;break;
 		case 3: n = 0x0E;break;
 		case 4: n = 0x0A;break;
-	}
+	} 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), n);
 }
+
+
+void Tetris::DrawMap()
+{
+	int i;
+	SetColor(0);
+
+	for(i=0;i<24;i++){
+		SetPos(i*2, 0);
+		cout << "■";
+		SetPos(i*2, 26);
+		cout << "■";
+	}
+
+	for(i=0;i<26;i++)
+	{
+		SetPos(0, i);
+		cout << "■";
+		SetPos(28, i);
+		cout << "■";
+		SetPos(46, i);
+		cout << "■";
+	}
+
+	for(i=14;i<24;i++)
+	{
+		SetPos(i*2, 16);
+		cout << "■";
+	}
+
+	SetColor(3);
+	Input_score();
+	SetPos(30, 21);
+	cout << "难度登记：" << rank;
+	SetPos(32, 2);
+	cout << "下一图形";
+}
+
+void Tetris::Draw(int x, int y, int num)
+{
+	int nx, ny;
+	for(int i=0;i<4;i++)
+	{
+		nx = x+sharp[num][2*i];
+		ny = y+sharp[num][2*i+1];
+		SetPos((ny+1)*2, nx+1);
+		SetColor(i+1);
+		cout << "■";
+	}
+}
+
+void Tetris::ReDraw(int x, int y, int num)
+{
+	int nx, ny;
+
+	for (int i=0;i<4;i++)
+	{
+		nx = x+sharp[num][2*i];
+		ny = y+sharp[num][2*i+1];
+		SetPos((ny+1)*2, nx+1);
+		cout << "  ";
+	}
+}
+
+bool Tetris::Judge(int x, int y, int num)
+{
+	int nx, ny;
+	for(int i=0;i<4;i++)
+	{
+		nx = x+sharp[num][2*i];
+		ny = y+sharp[num][2*i+1];
+		if(!(nx<25 && nx>=0 && ny<13 && ny>=0 && !map[nx][ny]))
+			return true;
+	}
+	return false;
+}
+
+
+
+
+
 
 
 
